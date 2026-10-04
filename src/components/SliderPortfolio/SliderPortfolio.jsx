@@ -2,7 +2,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper modules
-import { Autoplay } from 'swiper/modules';
+// import { Autoplay } from 'swiper/modules';
+import { Autoplay, Navigation  } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -16,26 +17,39 @@ import { useState } from 'react';
 import portfolio_1 from '../../assets/images/portfolio/portfolio_1.jpg';
 import portfolio_2 from '../../assets/images/portfolio/portfolio_2.jpg';
 import portfolio_3 from '../../assets/images/portfolio/portfolio_3.jpg';
+import portfolio_4 from '../../assets/images/portfolio/portfolio_4.jpg';
+import portfolio_5 from '../../assets/images/portfolio/portfolio_5.jpg';
+import portfolio_6 from '../../assets/images/portfolio/portfolio_6.jpg';
+import portfolio_7 from '../../assets/images/portfolio/portfolio_7.jpg';
+import portfolio_8 from '../../assets/images/portfolio/portfolio_8.jpg';
+import portfolio_9 from '../../assets/images/portfolio/portfolio_9.jpg';
+import portfolio_10 from '../../assets/images/portfolio/portfolio_10.jpg';
+import portfolio_11 from '../../assets/images/portfolio/portfolio_11.jpg';
 
 const SliderPortfolio = () => {
   const [swiper, setSwiper] = useState(null);
   const [portfolio, setPortfolio] = useState([
-    portfolio_1,portfolio_2, portfolio_3, portfolio_1, portfolio_2, portfolio_3
+    portfolio_1, portfolio_2, portfolio_3, portfolio_4, portfolio_5, portfolio_6, portfolio_7, portfolio_8, portfolio_9, portfolio_10, portfolio_11,
   ])
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
       <div>
         <Swiper
           className={classes.swiper}
           spaceBetween={30}
-          slidesPerView={3}
+          slidesPerView={1}
           autoplay={{
-            delay: 3000, // интервал в мс (3 сек)
+            delay: 8000, // интервал в мс (3 сек)
             disableOnInteraction: false, // автопрокрутка возобновляется после ручного переключения
           }}
           // navigation={true} // включает стрелки «назад/вперёд»
           modules={[Autoplay]}
-          onSwiper={(instance) => setSwiper(instance)}
+          onSwiper={(instance) => {
+            setSwiper(instance);
+            setActiveIndex(instance.realIndex);
+          }}
+          onSlideChange={(instance) => setActiveIndex(instance.realIndex)}
           loop={true} // бесконечная прокрутка (опционально)
           breakpoints={{
             // < 576px — 1 слайд, отступы те же
@@ -51,13 +65,13 @@ const SliderPortfolio = () => {
             // 992px — 3 слайда (можно оставить как дефолт)
             992: {
               slidesPerView: 3,
-              spaceBetween: 20,
+              spaceBetween: 30,
             },
           }}
         >
-          {portfolio.map(item =>
+          {portfolio.map((item, i) =>
             <SwiperSlide className={classes.slide}>
-              <img className={classes.img} src={item} alt="asdasd" />
+              <img className={activeIndex === i ? classes.imgActive : classes.img} src={item} alt="asdasd" />
             </SwiperSlide>
           )}
         </Swiper>

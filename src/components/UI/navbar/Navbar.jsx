@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Navbar.module.css";
 
-const Navbar = () => {
+const Navbar = ({ theme }) => {
   const [burger, setBurger] = useState("burger_close"); // тут была опечатка borger → burger
 
   const toggleBurger = () => {
@@ -13,9 +13,24 @@ const Navbar = () => {
     setBurger("burger_close");
   };
 
+  const handleScroll = (e, id) => {
+    e.preventDefault(); // Отменяем стандартное поведение, если оно глючит
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    } else {
+      console.warn(`Элемент #${id} не найден!`);
+    }
+
+    closeBurger()
+  };
+
   if (burger === "burger_close") {
     return (
-      <div className={classes.navbar}>
+      <div className={`${classes.navbar} ${classes[`${theme}`]}`}>
         <div className="container">
           <div className={classes.navbar__content}>
             <div className={classes.logo}>BEAUTY BY</div>
@@ -33,10 +48,11 @@ const Navbar = () => {
             </button>
 
             <nav className={classes.navbar__links}>
-              <a className={classes.navbar__link} href="#reviews">отзывы</a>
-              <a className={classes.navbar__link} href="#works">работы</a>
-              <a className={classes.navbar__link} href="#prices">цены</a>
-              <a className={classes.navbar__link} href="#contacts">контакты</a>
+              <a className={classes.navbar__link} onClick={(e) => handleScroll(e, 'main')} >главная</a>
+              <a className={classes.navbar__link} onClick={(e) => handleScroll(e, 'reviews')} >отзывы</a>
+              <a className={classes.navbar__link} onClick={(e) => handleScroll(e, 'works')} >работы</a>
+              <a className={classes.navbar__link} onClick={(e) => handleScroll(e, 'prices')} >цены</a>
+              <a className={classes.navbar__link} onClick={(e) => handleScroll(e, 'contacts')} >контакты</a>
             </nav>
           </div>
         </div>
@@ -46,7 +62,7 @@ const Navbar = () => {
 
   // Состояние burger_open — показываем полноэкранное меню
   return (
-    <div className={classes.burger__menu}>
+    <div className={`${classes.burger__menu} ${classes[`${theme}`]}`}>
       <div className={classes.container}>
         <div className={classes.navbar__content}>
           <div className={classes.menu_box}>
@@ -65,16 +81,19 @@ const Navbar = () => {
           </div>
 
           <nav className={classes.navbar__links_full}>
-            <a className={classes.navbar__link_full} href="#reviews" onClick={closeBurger}>
+            <a className={classes.navbar__link_full} href="#reviews" onClick={(e) => handleScroll(e, 'main')}>
+              главная
+            </a>
+            <a className={classes.navbar__link_full} href="#reviews" onClick={(e) => handleScroll(e, 'reviews')}>
               отзывы
             </a>
-            <a className={classes.navbar__link_full} href="#works" onClick={closeBurger}>
+            <a className={classes.navbar__link_full} href="#works" onClick={(e) => handleScroll(e, 'works')}>
               работы
             </a>
-            <a className={classes.navbar__link_full} href="#prices" onClick={closeBurger}>
+            <a className={classes.navbar__link_full} href="#prices" onClick={(e) => handleScroll(e, 'prices')}>
               цены
             </a>
-            <a className={classes.navbar__link_full} href="#contacts" onClick={closeBurger}>
+            <a className={classes.navbar__link_full} href="#contacts" onClick={(e) => handleScroll(e, 'contacts')}>
               контакты
             </a>
           </nav>

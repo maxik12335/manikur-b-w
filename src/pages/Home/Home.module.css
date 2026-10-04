@@ -34,12 +34,15 @@
   color: var(--color-w);
 }
 
+.tel:hover {
+  opacity: var(--color-hover);
+}
+
 .text {
   text-align: center;
   line-height: 40px;
   font-weight: 200;
   font-size: 14px;
-  color: var(--color-w);
   letter-spacing: 1px;
 }
 
@@ -76,12 +79,13 @@
 
 @media (max-width: 576px) {
   .title {
-    font-size: 29px;
-    line-height: 30px;
+    line-height: 40px;
+    margin-bottom: 10px;
   }
 
   .subtitle {
-    font-size: 25px;
+    font-size: 20px;
+    line-height: 30px;
   }
 
   .text {

@@ -4,7 +4,6 @@
 }
 
 .slide {
-  color: var(--color-w);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +28,7 @@
 .button {
   background: transparent;
   border: none;
-  color: #fff;
+  /* color: #fff; */
   font-size: 24px;
   cursor: pointer;
   padding: 10px;
@@ -50,9 +49,12 @@
   height: 100%;
 }
 
+.button_arrow_l,
+.button_arrow_r {
+  opacity: var(--color-hover);
+}
 
 .button_arrow_l {
-  fill: var(--color-w);
   opacity: 0.4;
   transform: rotate(180deg);
   transition: 0.2s;
@@ -61,21 +63,19 @@
   display: block;
 }
 
-.button_arrow_l:hover {
-  opacity: 1;
-}
-
 .button_arrow_r {
-  fill: var(--color-w);
   transition: 0.2s;
   opacity: 0.4;
   width: 100%;
   height: 100%;
   display: block;
 }
+
+.button_arrow_l:hover, 
 .button_arrow_r:hover {
-  opacity: 1;
+  opacity: 0.8;
 }
+
 
 
 @media (max-width: 1200px) {

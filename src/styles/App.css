@@ -1,13 +1,16 @@
 
 :root {
   --color-w: #F5F7FA;
-  --color-b: #242930;
+  /* --color-b: #242930; */
+  --color-b: #121214;
+  --color-hover: 0.4;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-width: none;
 }
 
 #root {
@@ -17,10 +20,16 @@
   justify-content: center;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-family-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .container {
@@ -39,17 +48,26 @@ ul {
 
 .section {
   height: 100vh;
-  background-color: var(--color-b);
-  color: #F5F7FA;
 }
 
-.main .container {
-  padding-top: 300px;
-  padding-bottom: 100px;
+/* нечётные: тёмный фон, светлый текст */
+.section:nth-child(odd) {
+  background-color: var(--color-b);
+  color: var(--color-w);
+}
+
+/* чётные: светлый фон, тёмный текст */
+.section:nth-child(even) {
+  background-color: var(--color-w);
+  color: var(--color-b);
+}
+
+
+.main {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .feedbacks {
@@ -69,18 +87,21 @@ ul {
 .price {
   padding-top: 200px;
   min-height: 100vh;
+  position: relative;
 }
 
 .portfolio {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .contacts {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 @media (max-width: 1400px) {

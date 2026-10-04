@@ -13,7 +13,6 @@
   background-color: transparent;
   border: 1px solid transparent;
   outline: none;
-  color: var(--color-w);
   padding-bottom: 10px;
   font-family: var(--font-family-sans);
   text-decoration: none;
@@ -22,18 +21,30 @@
   transition: none;
 }
 
+.button:hover {
+  opacity: var(--color-hover);
+}
+
 .buttonActive {
-  color: rgba(245, 247, 250, 0.4);
-  border-bottom-color: rgba(245, 247, 250, 0.4);
+  opacity: var(--color-hover);
+  border-bottom-color: var(--color-hover);
 }
 
 .buttonInactive {
   /* cursor: pointer; */
 }
 
-
 .list {
+  animation: fadeIn 0.5s ease-out;
+}
 
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .list__item {
@@ -45,14 +56,13 @@
   letter-spacing: 2px;
   font-weight: 300;
   text-transform: lowercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.005); 
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02); 
   padding-bottom: 2px;
   padding-top: 2px;
 }
 
-.list__item:nth-child(even) {
-  /* color: rgba(245, 247, 250, 0.4); */
+.list__item:hover {
+  background: #ffffff40;
 }
 
 .title {
@@ -109,5 +119,48 @@
 @media (max-width: 576px) {
   .description {
     padding-left: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgb(245 247 250 / 40%);
+
+  }
+
+  .buttons {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .button {
+    font-size: 20px;
+    padding-bottom: 5px;
+  }
+
+  .list {
+    height: 60vh;
+    overflow: scroll;
+  }
+
+  .list__item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px 0;
+    gap: 10px;
+  }
+
+  .title {
+    width: 100%;
+    text-align: left;
+  }
+
+  .price {
+    width: fit-content;
+  }
+
+  .time {
+    width: 50px;
+    text-align: right;
   }
 }

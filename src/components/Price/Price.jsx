@@ -29,12 +29,14 @@ const pedicur = [
 const Price = () => {
   // Стейт для активной категории ('manikur' или 'pedicur')
   const [activeTab, setActiveTab] = useState('manikur');
+  const [key, setKey] = useState(0); // ключ для пересоздания списка
 
   // Выбираем данные в зависимости от активной кнопки
   const currentList = activeTab === 'manikur' ? manikur : pedicur;
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+    setKey((prev) => prev + 1);
   };
 
   return (
@@ -50,13 +52,13 @@ const Price = () => {
         <button
           onClick={() => handleTabClick('pedicur')}
           className={`${classes.button} ${activeTab === 'pedicur' ? classes.buttonActive : classes.buttonInactive}`}
-          // aria-pressed={activeTab === 'pedicur'}
+          aria-pressed={activeTab === 'pedicur'}
         >
           педикюр
         </button>
       </div>
 
-      <ul className={classes.list}>
+      <ul key={key} className={classes.list}>
         {currentList.map((item) => (
           <li key={item.id} className={classes.list__item}>
             <p className={classes.title}>{item.title}</p>
